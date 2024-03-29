@@ -5,6 +5,7 @@
 from pydantic import Field, BaseModel
 from datetime import datetime
 
+
 class HashableBaseModel(BaseModel):
     """
     Добавление хэшируемости для моделей.
@@ -113,6 +114,7 @@ class CountryDTO(BaseModel):
     latitude: float | None
     longitude: float | None
 
+
 class CurrencyRatesDTO(BaseModel):
     """
     Модель данных о курсах валют.
@@ -159,6 +161,29 @@ class WeatherInfoDTO(BaseModel):
     visibility: int
     dt: datetime
     timezone: int
+
+
+class NewsInfoDTO(BaseModel):
+    """
+    Модель данных новостей.
+    .. code-block::
+        NewsDTO(
+            source="CNN",
+            title="The latest news about the coronavirus pandemic",
+            description="The latest news about the coronavirus pandemic",
+            url="https://www.cnn.com/world/live-news/coronavirus-pandemic-09-14-21-intl/index.html",
+            published_at="2021-09-14T20:00:00Z",
+            content="The latest news about the coronavirus pandemic"
+        )
+    """
+
+    source: str
+    title: str
+    description: str
+    url: str
+    published_at: datetime
+    content: str
+
 
 class LocationInfoDTO(BaseModel):
     """
@@ -210,3 +235,4 @@ class LocationInfoDTO(BaseModel):
     location: CountryDTO
     weather: WeatherInfoDTO
     currency_rates: dict[str, float]
+    news: list[NewsInfoDTO] | None
